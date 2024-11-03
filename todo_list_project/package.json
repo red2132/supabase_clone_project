@@ -10,10 +10,15 @@
     "generate-types": "npx supabase gen types typescript --project-id pmqzrkodkthifvaoxyiw --schema public > types_db.ts"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@material-tailwind/react": "^2.1.10",
-    "next": "15.0.2",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028"
+    "@mui/icons-material": "^6.1.6",
+    "@supabase/ssr": "^0.5.1",
+    "@tanstack/react-query": "^5.59.18",
+    "next": "14.2.15",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
