@@ -1,6 +1,6 @@
 "use client";
 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import MovieCard from "./movie-card";
 import { searchMovies } from "actions/movieActions";
 import { Spinner } from "@material-tailwind/react";
@@ -18,11 +18,14 @@ export default function MovieCardList() {
       queryFn: ({ pageParam }) =>
         searchMovies({ search, page: pageParam, pageSize: 12 }),
       getNextPageParam: (lastPage) =>
-        lastPage.page ? lastPage.page + 1 : null,
+        lastPage.page ? lastPage.page + 1 : undefined,
     });
 
+  const movieData = data?.pages?.map((page) => page.data)?.flat();
+
   const { ref, inView } = useInView({
-    threshold: 0,
+    rootMargin: "100px",
+    threshold: 0.5,
   });
 
   useEffect(() => {
@@ -31,24 +34,17 @@ export default function MovieCardList() {
     }
   }, [inView, hasNextPage]);
 
-  useEffect(() => {
-    console.log(inView);
-  }, [inView]);
-
   return (
     <div className="grid gap-1 md:grid-cols-4 grid-cols-3 w-full h-full">
-      {(isFetching || isFetchingNextPage) && <Spinner />}
       {
         <>
-          {data?.pages
-            ?.map((page) => page.data)
-            ?.flat()
-            ?.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
+          {movieData?.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
           <div ref={ref}></div>
         </>
       }
+      {isFetching && <Spinner />}
     </div>
   );
 }
