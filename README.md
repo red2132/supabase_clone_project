@@ -23,7 +23,7 @@ supabase에 만들어둔 데이터베이스를 기반으로 간단한 crud 구�
 
 ## 3. Neflix clone
 
-![netflix clone project - Chrome 2024-11-06 16-37-06](https://github.com/user-attachments/assets/0b4d8f61-f0aa-4950-a0b2-3ab6cfe6ce62)
+![netflix clone project - Chrome 2024-11-06 16-37-06](https://github.com/user-attachments/assets/0b4d8f61-f0aa-4950-a0b2-3ab6cfe6ce62)  
 게시물 무한 스크롤 구현
 
 - react-query의 useInfiniteQuery를 이용한 무한 스크롤 이벤트 구현
