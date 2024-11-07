@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "config/material-tailwind-theme-provider";
 import ReactQueryClientProvider from "config/ReactQueryClientProvider";
 import RecoilProvider from "config/RecoilProvider";
+import MainLayout from "components/layouts/main-layout";
+import Auth from "components/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
   description: "인스타그램 클론 프로젝트",
 };
 
+const loggedIn = true;
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -28,7 +31,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider>
           <ReactQueryClientProvider>
             <body className={inter.className}>
-              {children}
+              {loggedIn ? <MainLayout>{children}</MainLayout> : <Auth />}
             </body>
           </ReactQueryClientProvider>
         </ThemeProvider>
