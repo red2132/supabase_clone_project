@@ -6,6 +6,8 @@ import ReactQueryClientProvider from "config/ReactQueryClientProvider";
 import RecoilProvider from "config/RecoilProvider";
 import MainLayout from "components/layouts/main-layout";
 import Auth from "components/auth";
+import { createServerSupabaseClient } from "utils/supabase/server";
+import AuthProvider from "config/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,8 +16,12 @@ export const metadata: Metadata = {
   description: "인스타그램 클론 프로젝트",
 };
 
-const loggedIn = true;
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   return (
     <html lang="en">
       <head>
@@ -30,9 +36,11 @@ export default function RootLayout({ children }) {
       <RecoilProvider>
         <ThemeProvider>
           <ReactQueryClientProvider>
-            <body className={inter.className}>
-              {loggedIn ? <MainLayout>{children}</MainLayout> : <Auth />}
-            </body>
+            <AuthProvider accessToken={session?.access_token}>
+              <body className={inter.className}>
+                {session?.user ? <MainLayout>{children}</MainLayout> : <Auth />}
+              </body>
+            </AuthProvider>
           </ReactQueryClientProvider>
         </ThemeProvider>
       </RecoilProvider>
