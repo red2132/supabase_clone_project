@@ -12,13 +12,13 @@ export default function Sidebar() {
         <Link href="/">
           <Home className="text-2xl mb-10" />
         </Link>
-        <Link href="/">
+        <Link href="/people">
           <People className="text-2xl" />
         </Link>
-        <Link href="/">
+        <Link href="/discover">
           <Search className="text-2xl" />
         </Link>
-        <Link href="/">
+        <Link href="/chat">
           <Send className="text-2xl" />
         </Link>
       </div>
