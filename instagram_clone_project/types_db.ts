@@ -24,7 +24,7 @@ export type Database = {
           is_deleted?: boolean
           message: string
           receiver: string
-          sender: string
+          sender?: string
         }
         Update: {
           created_at?: string

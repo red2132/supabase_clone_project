@@ -51,7 +51,6 @@ export async function sendMessage({
     .insert({
       message,
       receiver: chatUserId,
-      sender: session.user.id,
     });
 
   if (sendMessageError) {
