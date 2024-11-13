@@ -13,7 +13,7 @@ export default function SignIn({ setView }) {
       options: {
         redirectTo: process.env.NEXT_PUBLIC_VERCEL_URL
           ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/auth/callback`
-          : "http://localhost:3000/auth/callback",
+          : "https://instagram-clone-project-one.vercel.app/auth/callback",
       },
     });
   };
