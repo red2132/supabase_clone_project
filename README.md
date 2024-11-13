@@ -24,7 +24,17 @@ supabase에 만들어둔 데이터베이스를 기반으로 간단한 crud 구�
 ## 3. Neflix clone
 
 ![netflix clone project - Chrome 2024-11-06 16-37-06](https://github.com/user-attachments/assets/0b4d8f61-f0aa-4950-a0b2-3ab6cfe6ce62)  
-게시물 무한 스크롤 구현
+게시물 무한 스크롤 구현  
+[배포 사이트](https://netflix-clone-project-phi.vercel.app/)  
 
 - react-query의 useInfiniteQuery를 이용한 무한 스크롤 이벤트 구현
 - react-intersection-observer의 useInView를 이용해 끝까지 내릴 경우 무한 스크롤을 일으키는 트리거 설정
+
+ ## 4. instagram clone
+ ![instagram-clone-project](https://github.com/user-attachments/assets/66be07d3-cfcb-45e3-8b6a-04370bee2fc1)  
+ 카카오 로그인 및 실시간 채팅 구현  
+ [배포 사이트](https://instagram-clone-project-one.vercel.app/)  
+- 카카오 디벨로퍼로 애플리케이션을 만들어 supabase와 연결
+- supabase의 realtime 기능을 이용한 실시간 채팅 구현
+ 
+
