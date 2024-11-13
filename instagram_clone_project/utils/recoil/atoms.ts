@@ -9,3 +9,8 @@ export const selectedUserIndexState = atom({
   key: "selectedIndex",
   default: null,
 });
+
+export const presentState = atom({
+  key: "presenceState",
+  default: null,
+});

@@ -6,9 +6,12 @@ import Person from "./Person";
 import { useRecoilState } from "recoil";
 import { getAllusers } from "actions/chatActions";
 import {
+  presentState,
   selectedUserIdState,
   selectedUserIndexState,
 } from "utils/recoil/atoms";
+import { createBrowserSupabaseClient } from "utils/supabase/client";
+import { useEffect } from "react";
 
 export default function ChatPeopleList({
   loggedInUser,
@@ -20,6 +23,8 @@ export default function ChatPeopleList({
   const [selectedUserIndex, setSelectedUserIndex] = useRecoilState(
     selectedUserIndexState
   );
+  const [presence, setPresence] = useRecoilState(presentState);
+  const supabase = createBrowserSupabaseClient();
 
   const getAllusersQuery = useQuery({
     queryKey: ["users"],
@@ -31,6 +36,35 @@ export default function ChatPeopleList({
       return otherUsers;
     },
   });
+
+  useEffect(() => {
+    const channel = supabase.channel("online_users", {
+      config: {
+        presence: {
+          key: loggedInUser.user.id,
+        },
+      },
+    });
+
+    channel.on("presence", { event: "sync" }, () => {
+      const newState = JSON.parse(JSON.stringify(channel.presenceState()));
+      setPresence(newState);
+    });
+
+    channel.subscribe(async (status) => {
+      if (status !== "SUBSCRIBED") {
+        return;
+      }
+
+      const newPresenceStatus = await channel.track({
+        onlineAt: new Date().toISOString(),
+      });
+    });
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }, []);
   return (
     <div className="h-screen min-w-60 flex flex-col bg-gray-50">
       {getAllusersQuery.data?.map((user, index) => (
@@ -44,7 +78,7 @@ export default function ChatPeopleList({
           isActive={selectedUserId === user.id}
           name={user.email.split("@")[0]}
           onChatScreen={false}
-          onlineAt={new Date().toISOString()}
+          onlineAt={presence?.[user.id]?.[0]?.onlineAt}
           userId={user.id}
         />
       ))}
