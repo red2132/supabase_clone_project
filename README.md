@@ -1,8 +1,8 @@
 # 웹사이트 클론 프로젝트
 
-사용언어: typescript 
-사용 DB: supabase
-프레임워크: next.js 14, react.18, react-query, tailwind
+사용언어: typescript  
+사용 DB: supabase  
+프레임워크: next.js 14, react.18, react-query, tailwind  
 
 ## 프로젝트 목표
 supabase를 기반으로 해서 dropbox의 드래그 앤 드롭 파일 업로드, netflix의 무한 스크롤, instagram의 로그인 및 실시간 채팅 구현
